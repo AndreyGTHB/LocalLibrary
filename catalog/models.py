@@ -11,3 +11,5 @@ class Genre(models.Model):
 
 class Book(models.Model):
     title = models.CharField(max_length=100, help_text="Enter a book name here")
+    author = models.ForeignKey('Author', on_delete=models.SET_NULL, null=True)
+    summary = models.TextField(max_length=1000, help_text="Enter a description of the book")

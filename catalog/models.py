@@ -74,17 +74,14 @@ class Author(models.Model):
         """
         String for representing the Model object.
         """
-        return '%s, %s' % (self.last_name, self.first_name)
+        return '%s %s' % (self.first_name, self.last_name)
 
 
 class Language(models.Model):
-    languages = (
-        ('ru', 'Russian'),
-        ('en', 'English'),
-        ('es', 'Spanish'),
-    )
-
-    name = models.CharField(max_length=30, choices=languages, help_text="Select a book language")
+    name = models.CharField(max_length=30, help_text="Enter a book language here")
 
     def __str__(self):
         return self.name
+
+
+

@@ -4,9 +4,9 @@ from .models import *
 
 def index(request):
     num_books = Book.objects.count()
-    num_instances = BookInstance.objects.all().count()
+    num_instances = BookInstance.objects.count()
 
-    num_instances_available = BookInstance.objects.all().filter(status__exact='a').count()
+    num_instances_available = BookInstance.objects.filter(status__exact='a').count()
     num_authors = Author.objects.count()
 
     response = render(
@@ -18,4 +18,6 @@ def index(request):
 
 
 def book_list(request):
-    num_books = Book.objects.count()
+    books = BookInstance.objects
+    num_books = books.count()
+    num_instances = BookInstance.objects.count()

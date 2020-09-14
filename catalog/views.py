@@ -1,5 +1,19 @@
 from django.shortcuts import render
+from django.views.generic import ListView, DetailView
 from .models import *
+
+
+class BookListView(ListView):
+    model = Book
+
+    context_object_name = 'book_list'
+    template_name = 'books/book_list.html'
+
+class BookDetailView(DetailView):
+    model = Book
+
+    context_object_name = 'book'
+    template_name = 'books/book_detail.html'
 
 
 def index(request):
@@ -16,8 +30,3 @@ def index(request):
     )
     return response
 
-
-def book_list(request):
-    books = BookInstance.objects
-    num_books = books.count()
-    num_instances = BookInstance.objects.count()

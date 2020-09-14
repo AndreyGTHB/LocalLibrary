@@ -57,6 +57,9 @@ class BookInstance(models.Model):
         """
         return '%s (%s)' % (self.id, self.book.title)
 
+    def get_status_display(self):
+        return dict(self.LOAN_STATUS)[self.status]
+
 
 class Author(models.Model):
     """

@@ -10,7 +10,7 @@
 
     {% load static %}
     <link rel="stylesheet" href="{% static "css/styles.css" %}">
-    {% block title %} <title>LocalLibrary</title> {% endblock %}
+    <title>{% block title %}LocalLibrary{% endblock %}</title>
 </head>
 <body>
     <div class="container-fluid">
@@ -20,7 +20,7 @@
                 {% block sidebar %}
                     <ul class="sidebar-nav">
                         <li><a href="{% url 'index' %}">Home</a></li>
-                        <li><a href="">All books</a></li>
+                        <li><a href="{% url 'books' %}">All books</a></li>
                         <li><a href="">All authors</a></li>
                     </ul>
                 {% endblock %}

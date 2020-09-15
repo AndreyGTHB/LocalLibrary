@@ -5,17 +5,15 @@
 
 {% block content %}
     <h1>{{ author }}</h1>
-    <h5><strong>Date of the birth: </strong>{{ author.date_of_birth }}</h5>
-    {% if author.date_of_death %}
-        <h5><strong>Date of the death: </strong>{{ author.date_of_death }}</h5>
-    {% endif %}
+    <p>{{ author.date_of_birth }}{% if author.date_of_death %} - {{ author.date_of_death }}{% endif %}</p>
     {% if author.book_set %}
-        <h2>Books:</h2>
+        <h4>Books:</h4>
+        <hr>
         <ul>
             {% for book in author.book_set.all %}
-                <hr>
                 <li>
                     <p class="text text-info"><a href="{{ book.get_absolute_url }}">{{ book }}</a></p>
+                    <p class="text text-muted">{{ book.summary }}</p>
                 </li>
             {% endfor %}
         </ul>

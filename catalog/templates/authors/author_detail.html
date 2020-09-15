@@ -1,0 +1,25 @@
+{% extends 'basic.html' %}
+
+
+{% block title %}{{ author }}{% endblock %}
+
+{% block content %}
+    <h1>{{ author }}</h1>
+    <h4><strong>Date of the birth: </strong>{{ author.date_of_birth }}</h4>
+    {% if author.date_of_death %}
+        <h4><strong>Date of the death: </strong>{{ author.date_of_death }}</h4>
+    {% endif %}
+    {% if author.book_set %}
+        <h2>Books:</h2>
+        <ul>
+            {% for book in author.book_set.all %}
+                <hr>
+                <li>
+                    <p class="text text-info"><a href="{% book.get_absolute_url %}">{{ book }}</a></p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="text text-warning">The are no authors in the library.</p>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'basic.html' %}
+
+
+{% block title %}Authors{% endblock %}
+
+{% block content %}
+    <h1>Author list</h1>
+    {% if author_list %}
+        <ul>
+            {% for author in author_list %}
+                <li>
+                    <a class="text-success" href="{{ author.get_absolute_url }}">
+                        {{ author.first_name }} {{ author.last_name }}
+                    </a>
+                    <a class="text-muted">
+                        ({{ author.date_of_birth }}{% if author.date_of_death %} - {{ author.date_of_death }}{% endif %})
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}

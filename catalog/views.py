@@ -16,6 +16,19 @@ class BookDetailView(DetailView):
     template_name = 'books/book_detail.html'
 
 
+class AuthorListView(ListView):
+    model = Author
+
+    context_object_name = 'author_list'
+    template_name = 'authors/author_list.html'
+
+class AuthorDetailView(DetailView):
+    model = Author
+
+    context_object_name = 'author'
+    template_name = 'authors/author_detail.html'
+
+
 def index(request):
     num_books = Book.objects.count()
     num_instances = BookInstance.objects.count()

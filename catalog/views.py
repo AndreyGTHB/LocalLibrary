@@ -5,6 +5,7 @@ from .models import *
 
 class BookListView(ListView):
     model = Book
+    paginate_by = 15
 
     context_object_name = 'book_list'
     template_name = 'books/book_list.html'

@@ -5,16 +5,16 @@
 
 {% block content %}
     <h1><strong>Title: </strong>{{ book.title }}</h1>
-    <h4><strong>Author: </strong><a class="text text-success" href="{{ book.author.get_absolute_url }}">{{ book.author }}</a></h4>
-    <h4><strong>Summary: </strong>{{ book.summary }}</h4>
-    <h4><strong><a href="https://www.isbn-international.org/content/what-isbn">ISBN: </a></strong>{{ book.isbn }}</h4>
-    <h4><strong>Language: </strong>{{ book.language }}</h4>
-    <h4>
+    <h5><strong>Author: </strong><a class="text text-success" href="{{ book.author.get_absolute_url }}">{{ book.author }}</a></h5>
+    <h5><strong>Summary: </strong>{{ book.summary }}</h5>
+    <h5><strong><a href="https://www.isbn-international.org/content/what-isbn">ISBN: </a></strong>{{ book.isbn }}</h5>
+    <h5><strong>Language: </strong>{{ book.language }}</h5>
+    <h5>
         <strong>Genres: </strong>
         {% for genre in book.genre.all %}
             {{ genre }}{% if not forloop.last %},{% else %}.{% endif %}
         {% endfor %}
-    </h4>
+    </h5>
 
     <h2>Copies:</h2>
     <ul>
@@ -27,7 +27,7 @@
             {% if instance.status != 'a' %}
                 <p><strong>Due to be returned: </strong>{{ instance.due_back }}</p>
             {% endif %}
-            <p><strong>Imprint: {{ instance.imprint }}</strong></p>
+            <p><strong>Imprint: </strong>{{ instance.imprint }}</p>
             <p class="text-muted"><strong>Id: </strong>{{ instance.id }}</p>
         </li>
     {% endfor %}

@@ -5,7 +5,7 @@ from .models import *
 
 class BookListView(ListView):
     model = Book
-    paginate_by = 15
+    paginate_by = 10
 
     context_object_name = 'book_list'
     template_name = 'books/book_list.html'
@@ -19,6 +19,7 @@ class BookDetailView(DetailView):
 
 class AuthorListView(ListView):
     model = Author
+    paginate_by = 10
 
     context_object_name = 'author_list'
     template_name = 'authors/author_list.html'

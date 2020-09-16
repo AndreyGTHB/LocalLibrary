@@ -4,7 +4,7 @@
 {% block title %}{{ book.title }}{% endblock %}
 
 {% block content %}
-    <h1><strong>Title: </strong>{{ book.title }}</h1>
+    <h1>{{ book.title }}</h1>
     <p><strong>Author: </strong><a class="text text-success" href="{{ book.author.get_absolute_url }}">{{ book.author }}</a></p>
     <p><strong>Summary: </strong>{{ book.summary }}</p>
     <p><strong><a href="https://www.isbn-international.org/content/what-isbn">ISBN: </a></strong>{{ book.isbn }}</p>

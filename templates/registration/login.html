@@ -1,0 +1,15 @@
+{% extends 'basic.html' %}
+
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+    {% if forms.error %}
+        <p class="text text-danger">Your username or password didn't match. Please try again.</p>
+    {% endif %}
+    {% if next %}
+        {% if account.is_authenticated %}
+            <p class="text text-muted">You are authenticated</p>
+        {% endif %}
+    {% endif %}
+{% endblock %}

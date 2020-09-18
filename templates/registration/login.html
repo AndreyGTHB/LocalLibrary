@@ -8,8 +8,25 @@
         <p class="text text-danger">Your username or password didn't match. Please try again.</p>
     {% endif %}
     {% if next %}
-        {% if account.is_authenticated %}
-            <p class="text text-muted">You are authenticated</p>
+        {% if user.is_authenticated %}
+            <p class="text text-muted">You are authenticated.</p>
+        {% else %}:
+            <p class="text text-muted">Please login to see this page.</p>
         {% endif %}
     {% endif %}
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <table>
+            <tr>
+              <td>{{ form.username.label_tag }}</td>
+              <td>{{ form.username }}</td>
+            </tr>
+            <tr>
+              <td>{{ form.password.label_tag }}</td>
+              <td>{{ form.password }}</td>
+            </tr>
+        </table>
+        <input type="submit" value="login" />
+        <input type="hidden" name="next" value="{{ next }}" />
+    </form>
 {% endblock %}

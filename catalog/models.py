@@ -1,6 +1,8 @@
 from django.db import models
 from django.urls import reverse
 import uuid
+from django.contrib.auth.models import User
+from datetime import date
 
 
 class Genre(models.Model):
@@ -39,6 +41,8 @@ class BookInstance(models.Model):
     imprint = models.CharField(max_length=200)
     due_back = models.DateField(null=True, blank=True)
 
+    borrower = models.ForeignKey(User, models.SET_NULL, null=True)
+
     LOAN_STATUS = (
         ('m', 'Maintenance'),
         ('o', 'On loan'),
@@ -59,6 +63,10 @@ class BookInstance(models.Model):
 
     def get_status_display(self):
         return dict(self.LOAN_STATUS)[self.status]
+
+    @property
+    def is_overview(self):
+        return self.due_back and date.today() > self.due_back
 
 
 class Author(models.Model):

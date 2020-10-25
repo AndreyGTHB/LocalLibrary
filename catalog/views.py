@@ -50,12 +50,3 @@ def index(request):
     )
     return response
 
-
-def name(request):
-    if request.method == 'POST':
-        form = NameForm(request.POST)
-        if form.is_valid():
-            return HttpResponseRedirect('thanks/')
-    else:
-        form = NameForm()
-    return render(request, 'test/name_form.html', {'form': form})

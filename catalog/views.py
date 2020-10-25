@@ -1,6 +1,8 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from .models import *
+from .forms import *
 
 
 class BookListView(ListView):
@@ -9,6 +11,7 @@ class BookListView(ListView):
 
     context_object_name = 'book_list'
     template_name = 'books/book_list.html'
+
 
 class BookDetailView(DetailView):
     model = Book
@@ -23,6 +26,7 @@ class AuthorListView(ListView):
 
     context_object_name = 'author_list'
     template_name = 'authors/author_list.html'
+
 
 class AuthorDetailView(DetailView):
     model = Author
@@ -41,10 +45,17 @@ def index(request):
     response = render(
         request,
         'index.html',
-        context={'num_books': num_books, 'num_instances': num_instances, 'num_instances_available': num_instances_available, 'num_authors': num_authors}
+        context={'num_books': num_books, 'num_instances': num_instances,
+                 'num_instances_available': num_instances_available, 'num_authors': num_authors}
     )
     return response
 
-def register(request):
-    pass
 
+def name(request):
+    if request.method == 'POST':
+        form = NameForm(request.POST)
+        if form.is_valid():
+            return HttpResponseRedirect('thanks/')
+    else:
+        form = NameForm()
+    return render(request, 'test/name_form.html', {'form': form})

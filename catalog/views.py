@@ -45,3 +45,6 @@ def index(request):
     )
     return response
 
+def register(request):
+    pass
+

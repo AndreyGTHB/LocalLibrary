@@ -1,8 +1,6 @@
-from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from .models import *
-from .forms import *
 
 
 class BookListView(ListView):
@@ -49,4 +47,9 @@ def index(request):
                  'num_instances_available': num_instances_available, 'num_authors': num_authors}
     )
     return response
+
+
+
+
+
 

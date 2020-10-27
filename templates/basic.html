@@ -33,10 +33,11 @@
                 {% endblock %}
             </div>
             <div class="col-sm-10 ">
-                {% block content %}{% endblock %} <hr>
+                {% block content %}{% endblock %}
 
                 {% block pagination %}
                     {% if is_paginated %}
+                        {% if page_obj.has_next %}<hr>{% endif %}
                         <div>
                             <span class="border">
                                 {% if page_obj.has_previous %}

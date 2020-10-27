@@ -25,7 +25,7 @@
             <input class="btn btn-lg" type="submit" value="login" />
             <input type="hidden" name="next" value="{{ next }}" />
         </form>
-        <p class="text-info"><a href="{% url 'register' %}">Registration</a></p>
+        <p class="text text-muted">Don't have an account? <a class="text text-info" href="{% url 'register' %}">Register</a></p>
         <p class="text-info"><a href="{% url 'password_reset' %}">Forgot your password?</a></p>
     {% endif %}
 {% endblock %}

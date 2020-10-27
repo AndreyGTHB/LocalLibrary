@@ -5,7 +5,11 @@
 
 {% block content %}
     {% if form.errors %}
-        {{ form.errors }}
+        <ul class="list-group list-group">
+            {% for error in form.errors_text %}
+                <li class="list-group-item list-group-item-danger">{{ error }}</li>
+            {% endfor %}
+        </ul>
     {% endif %}
     <form class="form" action="" method="post">
         {% csrf_token %}
@@ -34,4 +38,5 @@
         <br>
         <input class="btn btn-lg btn-hover" type="submit" value="Register">
     </form>
+    <p class="text text-muted">Already have an account? <a class="text text-info" href="{% url 'login' %}">Login</a></p>
 {% endblock %}

@@ -4,6 +4,8 @@ import re
 
 
 class RegistrationForm(forms.Form):
+    errors_text = set()
+
     first_name = forms.CharField(label='First name:', min_length=2, max_length=20)
     last_name = forms.CharField(label='Last name:', min_length=2, max_length=20)
 
@@ -15,6 +17,8 @@ class RegistrationForm(forms.Form):
         data = self.cleaned_data['email']
         searched = re.findall(r'@\w+.\w+', data)
         if len(searched) != 1:
-            raise ValidationError('Email does not correct. It have to have a domain.')
+            error = 'Email does not correct. It have to have a domain.'
+            self.errors_text.add(error)
+            raise ValidationError(error)
         return data
 

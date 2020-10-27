@@ -22,3 +22,4 @@ class RegistrationForm(forms.Form):
             raise ValidationError(error)
         return data
 
+

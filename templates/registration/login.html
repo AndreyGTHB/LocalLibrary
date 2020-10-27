@@ -5,7 +5,7 @@
 
 {% block content %}
     {% if user.is_authenticated %}
-        <p class="text">You are already signed in</p>
+        <p class="text text-muted">You are already signed in</p>
     {% else %}
         {% if form.errors %}
             <p class="text text-danger">Your username or password didn't match. Please try again.</p>

@@ -65,7 +65,7 @@ class BookInstance(models.Model):
         return dict(self.LOAN_STATUS)[self.status]
 
     @property
-    def is_overview(self):
+    def is_overdue(self):
         return self.due_back and date.today() > self.due_back
 
 

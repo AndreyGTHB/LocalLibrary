@@ -1,7 +1,12 @@
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from django.contrib.auth.models import Permission
-from django.shortcuts import render
+import datetime
+
+from django.contrib.auth.decorators import permission_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView
+
+from .forms import BookRefreshForm
 from .models import *
 
 
@@ -47,6 +52,21 @@ class LoanedBooksByUserListView(LoginRequiredMixin, ListView):
         if not self.request.user.has_perm('catalog.librarian'):
             books = books.filter(borrower=self.request.user)
         return books.order_by('due_back')
+
+
+@permission_required('catalog.librarian')
+def refresh_book(request, pk):
+    book_inst = get_object_or_404(BookInstance, pk=pk)
+    if request.method == 'POST':
+        form = BookRefreshForm(request.POST)
+        if form.is_valid():
+            book_inst.due_back = form.cleaned_data['renewal_date']
+            book_inst.save()
+            return HttpResponseRedirect(reverse('borrowed-books'))
+    else:
+        default_renewal_date = datetime.date.today() + datetime.timedelta(weeks=3)
+        form = BookRefreshForm({'renewal_date': default_renewal_date})
+    return render(request, 'books/book_refresh_form.html', {'form': form, 'book_inst': book_inst})
 
 
 def index(request):

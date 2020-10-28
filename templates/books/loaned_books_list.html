@@ -13,7 +13,12 @@
                         {{ bookinst.book.title }}
                     </a>
                     ({{ bookinst.due_back }})
-                    {% if perms.catalog.librarian %} - {{ bookinst.borrower }}{% endif %}
+                    {% if perms.catalog.librarian %}
+                        - {{ bookinst.borrower }} -
+                        <a href="{% url 'book-refresh' bookinst.id %}">
+                            Refresh
+                        </a>
+                    {% endif %}
                 </li>
             {% endfor %}
         </ul>

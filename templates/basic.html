@@ -18,28 +18,26 @@
         <div class="row">
             <div class="col-sm-2">
                 {% block sidebar %}
-                    <ul class="sidebar-nav">
-                        <li><a href="{% url 'index' %}">Home</a></li>
-                        <li><a href="{% url 'books' %}">All books</a></li>
-                        <li><a href="{% url 'authors' %}">All authors</a></li>
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-action"><a href="{% url 'index' %}">Home</a></li>
+                        <li class="list-group-item list-group-item-action"><a href="{% url 'books' %}">All books</a></li>
+                        <li class="list-group-item list-group-item-action"><a href="{% url 'authors' %}">All authors</a></li>
                     </ul>
-                    <div class="container-fluid">
-                        <ul class="list-group">
-                            {% if user.is_authenticated %}
-                                <li class="list-group-item list-group-item-info">User: {{ user.get_username }}</li>
-                                <li class="list-group-item list-group-item-info"><a href="{% url 'borrowed-books' %}">
-                                    {% if perms.catalog.librarian %}
-                                        Borrowed books
-                                    {% else %}
-                                        My borrowed
-                                    {% endif %}
-                                </a></li>
-                                <li class="list-group-item list-group-item-info"><a href="{% url 'logout'%}?next={{ request.path }}">Logout</a></li>
-                            {% else %}
-                                <li class="list-group-item list-group-item-info"><a href="{% url 'login'%}?next={{ request.path }}">Login</a></li>
-                            {% endif %}
-                        </ul>
-                    </div>
+                    <ul class="list-group">
+                        {% if user.is_authenticated %}
+                            <li class="list-group-item">{{ user.first_name }}</li>
+                            <li class="list-group-item list-group-item-action"><a href="{% url 'borrowed-books' %}">
+                                {% if perms.catalog.librarian %}
+                                    Borrowed books
+                                {% else %}
+                                    My borrowed
+                                {% endif %}
+                            </a></li>
+                            <li class="list-group-item list-group-item-action"><a href="{% url 'logout'%}?next={{ request.path }}">Logout</a></li>
+                        {% else %}
+                            <li class="list-group-item list-group-item-action"><a href="{% url 'login'%}?next={{ request.path }}">Login</a></li>
+                        {% endif %}
+                    </ul>
                 {% endblock %}
             </div>
             <div class="col-sm-10 ">

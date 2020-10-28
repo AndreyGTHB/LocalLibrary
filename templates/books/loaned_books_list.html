@@ -13,6 +13,7 @@
                         {{ bookinst.book.title }}
                     </a>
                     ({{ bookinst.due_back }})
+                    {% if perms.catalog.librarian %} - {{ bookinst.borrower }}{% endif %}
                 </li>
             {% endfor %}
         </ul>
